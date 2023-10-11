@@ -30,6 +30,7 @@ def day_one():
   
   #Now that the first action is over, we will inform the player the options that they have so far
   
+  print(f"Here we can do some actions according where we live! Some actions costs us less energy (because we are closer) \n I see you live near the {player_information['type_farm_choice']}. ")
   display_less_cost_energy_actions()
 
   if player_information['energy'] > 0:

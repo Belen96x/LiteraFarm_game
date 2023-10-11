@@ -74,7 +74,6 @@ def display_less_cost_energy_actions():
       This function displays the actions that costs less energy
 
       '''
-
       if player_information['type_farm_choice'] == 'river':
             print(f"You can do some {fishing.__name__}. This action costs 10 energy points")
       elif player_information['type_farm_choice'] == 'mid forest':
