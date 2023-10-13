@@ -1,6 +1,7 @@
 from day_cero_CharacterCreation import *
 from day_one_FirstActivities import *
 from day_two_InventoryPresentation import *
+from day_three_MovingAround import *
 from player_actions import * 
 from general_actions import *
 
@@ -9,7 +10,8 @@ from general_actions import *
 day_flow = {
     0: welcome_new_player,
     1: day_one,
-    2: day_two
+    2: day_two,
+    3: day_three
 }
 while True:
 

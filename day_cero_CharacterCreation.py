@@ -93,6 +93,7 @@ def welcome_new_player():
   player_information.setdefault('hp', 100)
   player_information.setdefault('energy', 100)
   player_information.setdefault('money', 0)
+  player_information.setdefault('current_location', player_information['type_farm_choice'])
 
   final_data = print(f"Amazing, amazing choices {player_information['player_name']}. Let's review all of them. \n You will live in a farm close to the {player_information['type_farm_choice']} named {players_farm_name} \n You faitful companion will be a {player_information['pet']['type_pet_choice']} named {player_information['pet']['pet_name']}\n \n Seems so exciting! Just to let you know some stuff that is important.\n Here you will have some health status and energy. Now, your health is {player_information['hp']} and your energy is {player_information['energy']}\n Every time you do some actions those two things might get affected. So be careful! We want you energized and healthy.\n If those levels go down to cero, you will have to end the day and might even loose some money. I know, right now you don't have any money, don't you?\n I see your account says {player_information['money']}. Don't worry! Some actions will give you money. We'll get there!\n Enjoy your time here, brave traveler! I'll see you around 😉\n")
   

@@ -111,3 +111,21 @@ def chopping_trees():
   final_message = print(f"Finished! Uf, what a workout. You chopped down {chopped_trees} trees. That costed {energy_cost_chop_trees} energy points, you have {player_information['energy']} points left")
   
   return final_message
+
+#Walking function
+
+def display_distances():
+    '''
+    This function will display each location on the map and the distance according to the current position of the player
+    '''
+    print(f'Currently, you are near the {player_information["current_location"]}')
+
+    if player_information['current_location'] == 'river':
+        print(f''' The mountain is 5km away
+           The mid forest is 10km away ''')
+    elif player_information['current_location'] == 'mountain':
+        print(f''' The river is 5km away
+           The mid forest is 15km away ''')
+    elif player_information['current_location'] == 'mid forest':
+        print(f''' The river is 10km away
+           The mountain is 15km away ''')
