@@ -26,7 +26,33 @@ def day_three():
     else:
         kickstart
     
-    display_distances()
+    distance_calculator_display(player_information, distances_forest)
 
+    while player_information['type_farm_choice'] == player_information['current_location']:
+        print(f"Hey!! I don't like tricks {player_information['player_name']}. You HAVE to move around. \n Don't choose {player_information['type_farm_choice']}, be curious")
+        distance_calculator_display(player_information, distances_forest)
+        break
+
+    print(f''' Welcome, brave adventurer! Now you are in the {player_information['current_location']}!
+               Here, we can do different things. But be cautious, you will have to come back home.
+               For that, you will need energy. Do you understand? 
+               Let's do some local actions here, and then go back home to {player_information['pet']['pet_name']} ''')
+    
+    display_less_cost_energy_actions()
+    
+    print(f'''Bravo, {player_information['player_name']}! Now you do something new and now how to do things further away from home
+              Let's check your inventory to see what you gained in this little excursion ''')
+    
+    access_inventory(inventory)
+
+    print(f"The night is coming. We must go back home asap, {player_information['player_name']}! Nights here are... dangerous ")
+
+    back_home(player_information, distances_forest)
+
+    if alert_away_from_home == True:
+        print("Just for today, I'll let it pass. Here, take a sleeping bag. But hey, this will not last. ")
+    else:
+        print(f"Welcome home, explorer! {player_information['pet']['pet_name']} was driving me crazy already!! ")
+    
     end_of_day()
     day_count()

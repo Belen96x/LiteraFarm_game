@@ -7,6 +7,9 @@ from day_cero_CharacterCreation import player_information
 import random
 
 inventory = {'wood': 0, 'minerals': {}, 'fish': []}
+
+distances_forest = {'community_center': 0, 'river': 5, 'mid forest': 10, 'mountain': 15}
+
 #Functions defining all the actions the character might do. They will be used later in the game according to different criteria
 
 #Cleaning soil function
@@ -112,20 +115,70 @@ def chopping_trees():
   
   return final_message
 
-#Walking function
-
-def display_distances():
+def distance_calculator_display(player_information, distances_forest):
     '''
-    This function will display each location on the map and the distance according to the current position of the player
+    This will calculate the distance from a place to another and display it to the user along with the energy cost for that walking 
+    If the user agrees with this, he will be there and the actions of that location will be available to them.
     '''
-    print(f'Currently, you are near the {player_information["current_location"]}')
+    while True:
+        location_2 = input('Where do you want to go?\nType "river", "mountain", or "mid forest" ')
+        if location_2 in distances_forest:
+            break 
+        else:
+            print("Psst!! Check your spelling")
 
-    if player_information['current_location'] == 'river':
-        print(f''' The mountain is 5km away
-           The mid forest is 10km away ''')
-    elif player_information['current_location'] == 'mountain':
-        print(f''' The river is 5km away
-           The mid forest is 15km away ''')
-    elif player_information['current_location'] == 'mid forest':
-        print(f''' The river is 10km away
-           The mountain is 15km away ''')
+    current_location = player_information.get('current_location')
+
+    if current_location in distances_forest and location_2 in distances_forest:
+        current_distance = distances_forest[current_location]
+        location_2_distance = distances_forest[location_2]
+
+        distance = abs(current_distance - location_2_distance)
+
+        energy_cost_distance = distance * 3
+
+        print(f'To get to {location_2} you have to walk {distance} kilometers. That costs {energy_cost_distance} energy points')
+        mooving_choice = input('Do you want to go? Type Y to do it and N to stay here ')
+
+        if mooving_choice.upper() == 'Y':
+          player_information['energy'] = player_information['energy'] - energy_cost_distance
+          player_information['current_location'] = location_2
+        else:
+          print(f"Ok! We'll stay in {current_location} a little bit more ")
+
+        return distance, energy_cost_distance
+
+def back_home(player_information, distances_forest):
+    '''
+    This function allows the player to go back home after moving to another location
+    '''
+    global alert_away_from_home
+    
+    home_location = player_information.get('type_farm_choice')
+    current_location = player_information.get('current_location')
+    
+    alert_away_from_home = ''
+
+    if home_location != current_location and home_location in distances_forest and current_location in distances_forest:
+        home_distance = distances_forest[home_location]
+        current_distance = distances_forest[current_location]
+
+        distance_to_home = abs(home_distance - current_distance)
+        energy_cost_distance = distance_to_home * 3
+
+        print(f"To get back home to {home_location} from {current_location}, you have to walk {distance_to_home} kilometers. That costs {energy_cost_distance} energy points.")
+        move_choice = input('Do you want to go back home? Type Y to do it and N to stay here ')
+
+        if move_choice.upper() == 'Y':
+            player_information['energy'] = player_information['energy'] - energy_cost_distance
+            player_information['current_location'] = home_location
+        else:
+            alert_away_from_home = True
+            print(f"You decide to stay in {current_location} ")
+    elif home_location == current_location:
+        alert_away_from_home = False
+        print("You are already at home! ")
+    else:
+        print("Hm, I don't know where that is! ")
+
+    return alert_away_from_home

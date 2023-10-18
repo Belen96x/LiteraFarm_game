@@ -21,7 +21,7 @@ def day_two():
               I took the time to put your things there. But honestly? If I didn't like you as I do, I'd throw them all to the river.
               Let's start over\n''')
     
-    access_inventory()
+    print(inventory)
 
     print(f'''Okay, so now you see how your vault is organized. 
               We'll gather some materials now, with the proper order you know? To grow the vault bigger!
@@ -31,18 +31,13 @@ def day_two():
 
     print(f"Well, let's see how you inventory grows!")
 
-    access_inventory()
+    print(inventory)
 
     print(f'''Amazing, {player_information['player_name']}! Now you now where to store properly your things.
               The whole forest thanks you for that.
               Let's try something. Try to access it by yourself''')
     
-    access_vault = input("Type <inventory> to access your vault ")
-
-    while access_vault != 'inventory':
-        print('Ups, wrong spelling. Check again!')
-        access_vault = input("Type <inventory> to access your vault ")
-    access_inventory()
+    access_inventory(inventory)
     
     print(f"Look at you go!! Nice, you are learning how to move around here, aren't you? Organizing it's so exhausting. I need a nap now \n")
 

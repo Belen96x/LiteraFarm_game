@@ -11,14 +11,15 @@ from player_actions import *
 
 
 #Options for less energy cost for the player. Display them.
+#ATTENTION: this function might be deprecated later.
 
 def less_cost_energy_actions():
     ''' This options will be offered any time the player has the chance to chose this actions with less energy cost. '''
-    if player_information['type_farm_choice'] == 'river':
+    if player_information['current_location'] == 'river':
           fishing()    
-    elif player_information['type_farm_choice'] == 'mid forest':
+    elif player_information['current_location'] == 'mid forest':
           chopping_trees() 
-    elif player_information['type_farm_choice'] == 'mountain':
+    elif player_information['current_location'] == 'mountain':
           mining()
 
 #This function will be performed at the beginning of each day
@@ -60,11 +61,19 @@ def season():
 
     return season_right_now
 
-def access_inventory():
-     '''
-     This function allows the player to check the inventory
-     '''
-     print(f"These are all the things you have so far {inventory}\n")
+def access_inventory(inventory):
+    '''
+    This function allows the player to check the inventory
+    '''
+
+    access_vault = input("Type 'inventory' to access your vault: ")
+
+    while access_vault.lower() != 'inventory':
+        print('Oops, check your spelling!!')
+        access_vault = input("Type 'inventory' to access your vault: ")
+
+    
+    print(f"These are all the things you have so far: {inventory}\n")
 
 action_choice = ''
 
@@ -74,12 +83,12 @@ def display_less_cost_energy_actions():
       This function displays the actions that costs less energy
 
       '''
-      if player_information['type_farm_choice'] == 'river':
+      if player_information['current_location'] == 'river':
             print(f"You can do some {fishing.__name__}. This action costs 10 energy points")
-      elif player_information['type_farm_choice'] == 'mid forest':
+      elif player_information['current_location'] == 'mid forest':
             print(f"You can do some {chopping_trees.__name__}. This action costs 10 energy points")
-      else:
-            print(f"You can do some {mining.__name__}. This action costs 10 energy points")
+      elif player_information['current_location'] == 'mountain':
+           print(f"You can do some {mining.__name__}. This action costs 10 energy points")
       
       global action_choice
       action_choice = input(f"Would you like to do that right now {player_information['player_name']}? Type Y to do it and N to not do anything ")
