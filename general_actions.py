@@ -97,4 +97,3 @@ def display_less_cost_energy_actions():
             less_cost_energy_actions()
       else:
             print('I see you are a little bit tired, I see!')
-

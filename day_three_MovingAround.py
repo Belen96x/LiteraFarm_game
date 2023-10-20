@@ -15,7 +15,7 @@ def day_three():
     '''
     start_of_day()
 
-    print('You seem a little bit bored ' + player_information['player_name'] + ' '+ 'Want to move around and know more about the forest?')
+    print('You seem a little bit bored, ' + player_information['player_name'] + '!' + ' '+ 'Want to move around and know more about the forest?')
 
     kickstart = input(f"Are you ready, {player_information['player_name']}? Type anything to start!")
   
@@ -48,11 +48,6 @@ def day_three():
     print(f"The night is coming. We must go back home asap, {player_information['player_name']}! Nights here are... dangerous ")
 
     back_home(player_information, distances_forest)
-
-    if alert_away_from_home == True:
-        print("Just for today, I'll let it pass. Here, take a sleeping bag. But hey, this will not last. ")
-    else:
-        print(f"Welcome home, explorer! {player_information['pet']['pet_name']} was driving me crazy already!! ")
     
     end_of_day()
     day_count()

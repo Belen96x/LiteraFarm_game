@@ -38,11 +38,12 @@ def day_one():
     
     display_less_cost_energy_actions()
 
+
     if action_choice.upper() == 'Y':
-       less_cost_energy_actions()
-       print(f"That's it for today! Tomorrow, we'll do some more fun things {player_information['player_name']}!")
-    else:
-       print(f"What a day, {player_information['player_name']}! I hope you rest well until tomorrow. We'll see more nice things to do. See you later 👋")
+      print(f"That's it for today! Tomorrow, we'll do some more fun things {player_information['player_name']}!")
+      
+    elif action_choice.upper() == 'N':
+      print(f"What a day, {player_information['player_name']}! I hope you rest well until tomorrow. We'll see more nice things to do. See you later 👋")       
   
     end_of_day()
     day_count()
