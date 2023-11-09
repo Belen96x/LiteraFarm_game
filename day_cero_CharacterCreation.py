@@ -1,5 +1,5 @@
-#from general_actions import day_count
-
+#from general_actions import save_to_json
+import json
 '''
 In this module there are three main functions:
 1. The welcome_new_player, that allows us to create a new player in the game.
@@ -100,6 +100,8 @@ def welcome_new_player():
   end_of_day()
   day_count()
 
+  save_to_json()
+
   return final_data
 
 def end_of_day():
@@ -114,3 +116,8 @@ def day_count():
      '''
      end_of_day.counter +=1 
      return end_of_day.counter
+
+def save_to_json():
+    with open('player_information.json', 'w') as json_file:
+        json.dump(player_information, json_file)
+    print("Player information saved to player_information.json.")

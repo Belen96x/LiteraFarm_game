@@ -14,7 +14,8 @@ Some default values are setted as well:
     3. Energy = 100
     4. Money = 0
 
-This class will be updated with methods that the player can execute further on.
+This class will be updated with methods that the player can execute further on. So far, it's not implemented in the code. 
+It will be implemented later on. But this is a start. 
 '''
 
 class player:

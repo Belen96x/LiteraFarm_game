@@ -91,29 +91,33 @@ def mining():
 #Chopping trees function
 
 def chopping_trees():
-  ''' This function allows the player to chop down trees. 
-      The wood chopped will be stored in the player's inventory.
-      This actions has less energy cost when the player lives near the forest
-      Each tree equals to 3 wood items '''
-  print(f"Aha! I see! You need some wood, don't you {player_information['player_name']}? Take your axe, we'll go deep into the woods \n Just one thing. Each tree you chop, it's 5 energy points! Be careful")
-  global inventory
-  chopped_trees = 0
-  total_trees = 10
-  while chopped_trees < total_trees:
-    
-    print(f'Chopped down tree {chopped_trees}. Trees remaining: {total_trees - chopped_trees}')
-    user_input = input('Want to keep chopping? Write Y to keep going and N to stop ')
-    if user_input.upper() == 'N':
-      break
-    chopped_trees += 1 
-  
-  energy_cost_chop_trees = chopped_trees * 5
-  total_wood = chopped_trees * 3
-  inventory['wood'] += total_wood
-  player_information['energy'] = player_information['energy'] - energy_cost_chop_trees
-  final_message = print(f"Finished! Uf, what a workout. You chopped down {chopped_trees} trees. That costed {energy_cost_chop_trees} energy points, you have {player_information['energy']} points left")
-  
-  return final_message
+    ''' This function allows the player to chop down trees. 
+        The wood chopped will be stored in the player's inventory.
+        This action has less energy cost when the player lives near the forest
+        Each tree equals 3 wood items '''
+    print(f"Aha! I see! You need some wood, don't you {player_information['player_name']}? Take your axe, we'll go deep into the woods \n Just one thing. Each tree you chop, it's 5 energy points! Be careful")
+    global inventory
+    total_trees = 10
+
+    def chop_tree(chopped_trees=0):
+        nonlocal total_trees
+
+        if chopped_trees >= total_trees or player_information['energy'] <= 0:
+            final_message = print(f"Finished! Uf, what a workout. You chopped down {chopped_trees} trees. You have {player_information['energy']} energy points left")
+            return final_message
+
+        print(f'Chopped down tree {chopped_trees}. Trees remaining: {total_trees - chopped_trees}')
+        user_input = input('Want to keep chopping? Write Y to keep going and N to stop ')
+
+        if user_input.upper() == 'Y':
+            player_information['energy'] -= 5  # Deduct energy for each tree chopped
+            inventory['wood'] += 3  # Add wood to inventory for each tree chopped
+            return chop_tree(chopped_trees + 1)
+        else:
+            final_message = print(f"Finished! Uf, what a workout. You chopped down {chopped_trees} trees. You have {player_information['energy']} energy points left")
+            return final_message
+
+    return chop_tree()
 
 def distance_calculator_display(player_information, distances_forest):
     '''
